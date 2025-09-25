@@ -1,60 +1,80 @@
-# Notes App – Two-Microservice Demo
+# 🐳 learndocker
 
-A minimal example to learn **Docker** and **microservices**.  
-This app has **two containers**:
+A tiny **two-microservice** demo to learn Docker and docker-compose.  
+The project runs a **FastAPI backend** and a **React frontend**, each in its own container.
 
-- **notes-api**: FastAPI backend serving a static list of notes.
-- **notes-ui**: React frontend displaying those notes.
+> 📂 GitHub Repo: [martalexaa/learndocker](https://github.com/martalexaa/learndocker)
 
 ---
 
-## Quick Start
+## ✨ Overview
 
-### 1. Clone & Build
+- **Backend – notes-api**  
+  A FastAPI service exposing a single endpoint `/notes` that returns a static JSON list.
+
+- **Frontend – notes-ui**  
+  A React (Vite) app that fetches the notes from the API and displays them.
+
+- **docker-compose**  
+  Spins up both services with one command, automatically creating a shared network.
+
+---
+
+## 🚀 Quick Start
+
+Clone the repo and launch the stack:
+
 ```bash
-git clone <your-repo-url> notes-app
-cd notes-app
+git clone https://github.com/martalexaa/learndocker.git
+cd learndocker
 docker-compose up --build
-2. Access the Services
-Frontend (React): http://localhost:5173
+Access the services
+Frontend: http://localhost:5173
 
-API (FastAPI): http://localhost:8000/notes
+API: http://localhost:8000/notes
 
-Project Structure
+Docker will build both images on first run and reuse them next time.
 
-notes-app/
-├─ notes-api/        # FastAPI backend
+🗂 Project Structure
+
+learndocker/
+├─ notes-api/           # FastAPI backend
 │  ├─ app.py
 │  ├─ requirements.txt
 │  └─ Dockerfile
-├─ notes-ui/         # React frontend (built with Vite)
-│  ├─ src/App.jsx
+├─ notes-ui/            # React frontend (Vite)
+│  ├─ src/
+│  │   ├─ App.jsx
+│  │   └─ main.jsx
 │  ├─ package.json
 │  └─ Dockerfile
 └─ docker-compose.yml
 
-🧩 How It Works
-
-notes-api returns a hard-coded JSON array of notes at /notes.
-
-notes-ui fetches that endpoint and renders the notes.
-
-docker-compose creates a shared network so the frontend can reach the backend
-using the hostname notes-api.
-
 🛠 Development Tips
 
-To add new endpoints, edit notes-api/app.py.
+Backend hot-reload:
+Run locally without Docker:
 
-For frontend changes, edit files in notes-ui/src/ and rebuild.
+cd notes-api
+uvicorn app:app --reload
 
-🛠 Next Steps
+Frontend dev mode:
 
-This starter is intentionally simple.
-Ideas to expand:
+cd notes-ui
+npm install
+npm run dev
 
-Add a database (PostgreSQL, SQLite, etc.).
+If you modify code while containers are running, rebuild with:
 
-Create POST/PUT/DELETE endpoints for full CRUD.
+docker-compose up --build
 
-Add environment variables for configurable API URLs.
+🌱 Next Steps
+
+This starter is intentionally simple. Possible enhancements:
+
+Add a database (e.g., PostgreSQL or SQLite) for persistent notes.
+
+Implement full CRUD (create, update, delete) API endpoints.
+
+Use environment variables for configurable API URLs.
+
