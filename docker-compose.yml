@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  notes-api:
+    build: ./notes-api
+    container_name: notes-api
+    ports:
+      - "8000:8000"
+
+  notes-ui:
+    build: ./notes-ui
+    container_name: notes-ui
+    ports:
+      - "5173:5173"
+    depends_on:
+      - notes-api
