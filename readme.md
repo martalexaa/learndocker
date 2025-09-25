@@ -28,12 +28,26 @@ Clone the repo and launch the stack:
 git clone https://github.com/martalexaa/learndocker.git
 cd learndocker
 docker-compose up --build
-Access the services
-Frontend: http://localhost:5173
 
+Access the services:
+
+Frontend: http://localhost:5173
 API: http://localhost:8000/notes
 
 Docker will build both images on first run and reuse them next time.
+
+---
+
+📖 FastAPI Documentation
+
+FastAPI provides built-in interactive docs:
+
+Swagger UI (interactive): http://localhost:8000/docs
+ReDoc (alternative view): http://localhost:8000/redoc
+
+Open either URL in a browser while the stack is running to explore endpoints and send test requests directly.
+
+---
 
 🗂 Project Structure
 
